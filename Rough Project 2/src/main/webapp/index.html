@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */ 
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+</style>
+
+<body bgcolor="#ADD8E6">
+<br>
+<center><h1>Hi Hello Welcome to Sathiya's Employee Contact Info App</h1></center>
+<br>
+<center>
+		<span id="display">
+			<button type="button" class="button" onclick="displayFn()">DisplayAll Contact</button>
+		</span>
+
+		<span id="store">
+		<button type="button" class="button button2" onclick="storeFn()">Store Contact</button>
+		</span>
+		
+		<span id="update">
+		<button type="button" class="button button3" onclick="updateFn()">Update Contact</button>
+		</span>
+		
+		<span id="delete">
+		<button type="button" class="button button4" onclick="deleteFn()">Delete Contact</button>
+		</span>
+		
+		<span id="read">
+		<button type="button" class="button button5" onclick="readFn()">Read Contact</button>
+		</span>	
+</center>
+<center>
+<div id="center">
+
+</div>
+</center>
+<script>
+function updateFn()
+{
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      document.getElementById("center").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("PUT", "Api", true);
+	  xhttp.send();
+}
+
+function deleteFn()
+{
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      document.getElementById("center").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("DELETE", "Api", true);
+	  xhttp.send();
+}
+
+function readFn()
+{
+	
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      document.getElementById("center").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("GET", "Api" , true);
+	  xhttp.send();
+}
+
+function storeFn()
+{
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      document.getElementById("center").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("POST", "Api", true);
+	  xhttp.send();
+}
+
+function displayFn() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("center").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "DisplayAll", true);
+  xhttp.send();
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

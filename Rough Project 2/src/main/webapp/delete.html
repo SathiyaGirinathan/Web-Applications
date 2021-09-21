@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text] {
+  border: 1px solid blue; /*rewriting standard style, it is necessary to be able to change the size*/
+  height: 30px;
+  width: 100px
+}
+input[type=submit] {
+  border: 1px solid red;
+   /*rewriting standard style, it is necessary to be able to change the size*/
+     font-size:20px;
+  height: 30px;
+  width: 100px
+}
+</style>
+<body>
+<center><h1>Hi, Enter the Employee ID that you want to delete</h1><br><br><br><br>
+
+<form action="DeleteServlet" method="delete">
+<table>
+<tr><td><h2>Enter the Employee Id:</h2></td><td><input type="text" name="empid"></td></tr>
+</table>
+<h1><input type="submit" value="Delete"/></h1>
+</form>
+</center>
+</body>
+</html>
+

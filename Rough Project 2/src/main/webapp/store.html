@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+td{
+  border: 1px solid blue;
+  text-align: left;
+  padding: 8px;
+}
+input[type=submit] {
+  border: 2px solid red; /*rewriting standard style, it is necessary to be able to change the size*/
+  font-size:20px;
+  height: 30px;
+  width: 100px
+}
+
+</style>
+
+<body bgcolor="white"style="color:black;font-size:18px;">
+<div id="center">
+</div>
+<center><h1>Welcome to Sathiya Contact Info app</h1>
+<form action="StoreServlet" method="POST">
+<table>
+<tr><td>Employee Id:</td><td><input type="text" name="empid"></td></tr>
+<tr><td>Name :</td><td> <input type="text" name="name"></td></tr>
+<tr><td>Age : </td><td><input type="text" name="age"></td></tr>
+<tr><td>Email :</td><td> <input type="text" name="email"/></td></tr>
+<tr><td>Mobile :</td><td> <input type="text" name="mobile"/></td></tr>
+</table>
+<br><br>
+<input type="submit" name="Submit">
+</form>
+</center>
+</body>
+</html>
