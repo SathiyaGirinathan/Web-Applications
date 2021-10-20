@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>Login Page</title>
+    
+    <style>
+    body {
+  background-image: url('QuizGif.gif');
+   background-repeat: no-repeat;
+}
+.text-block {
+  position: absolute;
+  top: 20px;
+  right: 400px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+    #login {
+      background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 15px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	}
+    </style>
+  </head>
+
+  <body>
+  
+    <center>
+     <div id="demo">
+     <div class="text-block">
+    <h1>Hi, Welcome to Sathiya's quiz application</h1>
+    <br>
+    <h2>Admin's Login Page</h2>
+    <br>
+    <h3>
+   
+    Enter User-Name: <input type="text" name="nameString" id="uname" placeholder="Name..."><br>
+    <br>
+    Enter Password : <input type="password" name="passwordString" id="pwd" placeholder="pwd..." ><br>
+    <br>
+    <input type="checkbox" onclick="myFunction()">Show Password
+	<br><br>
+	
+	<script>
+	function myFunction() 
+	{
+	  var x = document.getElementById("pwd");
+	  if (x.type === "password") {
+	    x.type = "text";
+	  } else {
+	    x.type = "password";
+	  }
+	}
+	</script>
+
+	
+    <input type="submit" value="Login" id="login" onclick="submit()">
+
+    </h3>
+    </div>
+    </div>
+    </center>
+    <script>
+        function submit()
+        {
+            var uname = document.getElementById("uname").value;
+            var pwd = document.getElementById("pwd").value;
+            var a=[
+                {
+                    "nameString" : uname,
+                    "passwordString" : pwd
+                }
+            ];
+			
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("demo").innerHTML =
+                  this.responseText;
+                }
+              };
+	        xhr.open("POST","/api/v1/adminInfo",true);
+	        xhr.setRequestHeader("Content-Type","application/json");
+	        xhr.send(JSON.stringify(a));
+            
+        }
+    </script>
+  
+  </body>
+</html>

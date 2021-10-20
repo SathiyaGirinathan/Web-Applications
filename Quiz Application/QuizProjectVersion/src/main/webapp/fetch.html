@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Fetch Questions</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    th{ 
+        color:#fff;
+      }
+</style>
+
+
+
+
+</head>
+<body>
+	<center><input type="Submit" onclick="submit()" value="JAVA"></center>
+   <br>
+   <table class="table table-striped">
+    <tr  class="bg-info">
+        <th>Questions</th>
+        <th>Option 1</th>
+        <th>Option 2</th>
+        <th>Option 3</th>
+        <th>Option 4</th>
+    </tr>
+
+    <tbody id="myTable">
+    </tbody>
+	</table>
+<center>
+	<form action="/information.html">
+		<input type="Submit" value="Proceed">		
+	</form>
+</center>	
+	
+	
+	<script type="text/javascript">
+	var arr = [];
+	function submit(){
+		var getJSON = function(url, callback) {
+
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', url, true);
+	    xhr.responseType = 'json';
+	    
+	    xhr.onload = function() {
+	    
+	        var status = xhr.status;
+	        
+	        if (status == 200) {
+	            callback(null, xhr.response);
+	        } else {
+	            callback(status);
+	        }
+	    };
+	    
+	    xhr.send();
+	};
+	//I am giving here a url
+	getJSON("/api/v1/Questions",  function(err, data) {
+	    
+	    if (err != null) {
+	        console.error(err);
+	    } else {
+	   		arr= JSON.parse(data);
+	   		console.log(arr[0]);
+	    }
+	});
+	buildTable(arr);
+}
+function buildTable(data){
+	var table = document.getElementById('myTable')
+
+	for (var i = 0; i < data.length; i++){
+		var row = `<tr>
+						<td>${data[i].questionString}</td>
+						<td>${data[i].option1}</td>
+						<td>${data[i].option2}</td>
+						<td>${data[i].option3}</td>
+						<td>${data[i].option4}</td>
+				  </tr>`
+		table.innerHTML += row
+	}
+}
+window.onload = function()
+{
+	submit();	
+}
+	</script>
+</body>
+</html>

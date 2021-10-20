@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>User Info</title>
+</head>
+<body>
+    
+<center>
+    <h2 style="color:red;">Test Link Generation Page</h2>
+<h3><br><br>
+
+    <!--  Enter the test ID: <input type="text" name="tId">-->
+   Student/ Intern Information 
+    <br>
+------------------------------------
+    <table border=0>
+    <tr><td>Enter the userId(to Whom the test will be?)</td><td>:<input type="text" name="uid" id="uid" placeholder="like 111252"></td></tr>
+    <tr><td>Set the expiry date and time for the test link</td><td>:<input type="datetime-local" id="mytime" name="appt"></td></tr>
+    <tr><td>Click this to generate Link </td><td>:<input type="submit" value="Generate Link" onclick="submit()"></td></tr>
+    <tr><td></td><td><div id="demo"></div></td></tr>
+    </table>
+
+</h3>
+<br><br>
+<p style="color:red;">Instructions for the Test
+<br>
+-----------------------------
+<table border=0 style="color:red;">
+    <tr><td>1)</td><td>Maximum marks for the test is 10</td></tr>
+    <tr><td>2)</td><td>Time limit is 05 minutes</td></tr>
+    <tr><td>3)</td><td>Each question carries 1 mark</td></tr>
+</table>
+</p>
+</center>
+
+
+<script>
+
+function submit()
+{
+	if(document.getElementById("uid").value.length == 0)
+	{
+	    alert("User id input field should not be empty")
+	}
+	else if(document.getElementById("mytime").value.length == 0)
+	{
+		alert("Date and time field should not be empty")	
+	}
+	else{
+	    var userId = document.getElementById("uid").value;
+	    var dateTime = document.getElementById("mytime").value;
+	    var a=[
+	        {
+	            "userId" : userId,
+	            "dateTime" : dateTime
+	        }
+	    ];
+		
+	    var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = function() {
+	        if (this.readyState == 4 && this.status == 200) {
+	          document.getElementById("demo").innerHTML = this.responseText;
+	        }
+	      };
+	    xhr.open("POST","/api/v1/LinkApi",true);
+	    xhr.setRequestHeader("Content-Type","application/json");
+	    xhr.send(JSON.stringify(a));
+	}
+}
+</script>
+</body>
+</html>
