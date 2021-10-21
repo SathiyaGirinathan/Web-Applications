@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body style="text-align: center;" >
+	
+    <h1>Hi , Welcome to Test Page</h1>
+
+      Enter your user/student id: <input type="text" id="uid" name="uid">
+     <input type="submit" name="submit" value="Validate User" onclick="submit()">
+	 <div id="demo"></div>
+    
+    <script >
+	const params = new URLSearchParams(document.location.search);
+ 	const param=params.get("testId"); 
+ 	const testId=param;
+ 	
+ 	function submit()
+ 	{
+	 	var getJSON = function(url, callback) 
+		   {	     	
+	
+		  	    var xhr = new XMLHttpRequest();
+		  	 	 xhr.open("GET",url,true);
+		  	    xhr.responseType = 'json';
+		  	    
+		  	    xhr.onload = function() 
+		  	    {		 
+		  	        var status = xhr.status;
+		  	        
+		  	        if (status == 200) {
+		  	            callback(null, xhr.response);
+		  	        } else {
+		  	            callback(status);
+		  	        }
+		  	    };
+		        xhr.setRequestHeader("Content-Type","application/json");
+		        xhr.send();
+	  	};
+	  	var uid=document.getElementById("uid").value;
+	  	//I am giving here a url
+	  	getJSON("DemoServlet?uid="+uid+"&testId="+testId,  function(err, data) {
+	  	    
+	  	    if (err != null) {
+	  	        console.error(err);
+	  	    } else 
+	  	    {
+	  	        arr= JSON.parse(data);
+	  	       	console.log(arr);
+	  	      	validUser(arr);
+	  	    }
+	  	});
+ 	}
+ 	var jsonData=[];
+ 	function validUser(data)
+ 	{
+ 		jsonData= data;
+ 		if(jsonData[0].status==1)
+ 		{
+ 			var str = "You are a valid user. Click this link";
+ 			var result = str.link("/test.html?testId="+param);
+ 			document.getElementById("demo").innerHTML = result;
+ 		}
+ 		else
+ 		{
+ 			var str = "Sorry, You are not a valid user";
+ 			document.getElementById("demo").innerHTML = str;
+ 		}
+ 	}
+    </script>
+    
+   
+</body>
+</html>

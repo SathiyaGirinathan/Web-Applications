@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>Login Page</title>
+    
+    <style>
+    body {
+  background-image: url('QuizGif.gif');
+   background-repeat: no-repeat;
+}
+.text-block {
+  position: absolute;
+  top: 20px;
+  right: 400px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+    #login {
+      background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 15px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	}
+    </style>
+  </head>
+
+  <body style="text-align: center;" >
+  
+
+     <div id="demo">
+     <div class="text-block">
+    <h1>Hi, Welcome to Sathiya's quiz application</h1>
+    <br>
+    <h2>Admin's Login Page</h2>
+    <br>
+    <h3>
+   
+    Enter User-Name: <input type="text" name="nameString" id="uname" placeholder="Name..."><br>
+    <br>
+    Enter Password : <input type="password" name="passwordString" id="pwd" placeholder="pwd..." ><br>
+    <br>
+    <input type="checkbox" onclick="myFunction()">Show Password
+    
+    <div id="wr"></div>
+	<br><br>
+	
+	<script>
+	function myFunction() 
+	{
+	  var x = document.getElementById("pwd");
+	  if (x.type === "password") {
+	    x.type = "text";
+	  } else {
+	    x.type = "password";
+	  }
+	}
+	</script>
+
+	
+    <input type="submit" value="Login" id="login" onclick="submit()">
+
+    </h3>
+    </div>
+    </div>
+
+    <script>
+ 	function submit()
+ 	{
+	 	var getJSON = function(url, callback) 
+		{	     	
+	
+		  	    var xhr = new XMLHttpRequest();
+		  	 	 xhr.open("POST",url,true);
+		  	    xhr.responseType = 'json';
+		  	    
+		  	    xhr.onload = function() 
+		  	    {		 
+		  	        var status = xhr.status;
+		  	        
+		  	        if (status == 200) {
+		  	            callback(null, xhr.response);
+		  	        } else {
+		  	            callback(status);
+		  	        }
+		  	    };
+		        xhr.setRequestHeader("Content-Type","application/json");
+		        xhr.send(JSON.stringify(a));
+	  	};
+	  	var uname = document.getElementById("uname").value;
+	  	var pwd = document.getElementById("pwd").value;
+	  	var a=[
+	  	    {
+	  	        "nameString" : uname,
+	  	        "passwordString" : pwd
+	  	    }
+	  	];
+
+	  	//I am giving here a url
+	  	getJSON("/api/v1/adminInfo",  function(err, data) {
+	  	    
+	  	    if (err != null) {
+	  	        console.error(err);
+	  	    } else 
+	  	    {
+	  	        arr= JSON.parse(data);
+	  	       	console.log(arr);
+	  	      	validUser(arr);
+	  	    }
+	  	});
+ 	}
+ 	var jsonData=[];
+ 	function validUser(data)
+ 	{
+ 		jsonData= data;
+ 		if(jsonData[0].status==1)
+ 		{
+ 			location.replace("/option.html");
+ 		}
+ 		else
+ 		{
+ 			var str = "Sorry, Your password is wrong";
+ 			document.getElementById("wr").innerHTML = str;
+ 		}
+ 	}
+    </script>
+  
+  </body>
+</html>
